@@ -63,7 +63,7 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
     }
     var jsonResponse Container
 
-    if err := json.Unmarshal([]byte(jStr), &jsonResponse); err != nil {
+    if err := json.Unmarshal(body, &jsonResponse); err != nil {
     		log.Fatal(err)
     }
 
