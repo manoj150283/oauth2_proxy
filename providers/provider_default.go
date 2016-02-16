@@ -54,24 +54,29 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 		err = fmt.Errorf("got %d from %q %s", resp.StatusCode, p.RedeemURL.String(), body)
 		return
 	}
-    log.Printf("%s manoj11111111:", body)
 
     type Container struct {
-		Key struct {
-			AccessToken string `json:"token"`
-		} `json:"access_token"`
-	}
-	var jsonResponse Container
+        Token struct {
+            //Key2 string `json:"_id"`
+            AccessToken string `json:"token"`
+        } `json:"access_token"`
+    }
+    var jsonResponse Container
+
+    if err := json.Unmarshal([]byte(jStr), &jsonResponse); err != nil {
+    		log.Fatal(err)
+    }
+
 	log.Printf("------------manoj---------------")
-    log.Printf("%s container:", jsonResponse)
+    log.Printf("%s Token:", jsonResponse.Token.AccessToken)
     log.Printf("------------manoj---------------")
 	// blindly try json and x-www-form-urlencoded
 	//var jsonResponse struct {
 	//	AccessToken string `json:"access_token.token"`
 	//}
 
-	log.Printf("%s jsonResponse:", jsonResponse)
-	log.Printf("%s jsonResponse111:", json.Unmarshal(body, &jsonResponse))
+	//log.Printf("%s jsonResponse:", jsonResponse)
+	//log.Printf("%s jsonResponse111:", json.Unmarshal(body, &jsonResponse))
 	//log.Printf("%s jsonResponse.AccessToken:", jsonResponse.AccessToken)
 	//err = json.Unmarshal(body, &jsonResponse)
 	//if err == nil {
