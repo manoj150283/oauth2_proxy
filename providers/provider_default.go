@@ -32,6 +32,7 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	var req *http.Request
 	req, err = http.NewRequest("POST", p.RedeemURL.String(), bytes.NewBufferString(params.Encode()))
 	if err != nil {
+	    log.Printf("%s Provider_defualt Error:", err)
 		return
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -39,6 +40,7 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	var resp *http.Response
 	resp, err = http.DefaultClient.Do(req)
 	if err != nil {
+	    log.Printf("%s Provider_defualt Error1111:", err)
 		return nil, err
 	}
 	var body []byte
