@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/manoj150283/go-simplejson"
+	"github.com/bitly/go-simplejson"
 )
 
 func Request(req *http.Request) (*simplejson.Json, error) {
