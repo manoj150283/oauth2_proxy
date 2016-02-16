@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"log"
-	"github.com/manoj150283/oauth2_proxy/cookie"
+
+	"github.com/bitly/oauth2_proxy/cookie"
 )
 
 func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err error) {
@@ -32,7 +32,6 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	var req *http.Request
 	req, err = http.NewRequest("POST", p.RedeemURL.String(), bytes.NewBufferString(params.Encode()))
 	if err != nil {
-	    log.Printf("%s Provider_defualt Error:", err)
 		return
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -40,7 +39,6 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	var resp *http.Response
 	resp, err = http.DefaultClient.Do(req)
 	if err != nil {
-	    log.Printf("%s Provider_defualt Error1111:", err)
 		return nil, err
 	}
 	var body []byte
@@ -55,41 +53,23 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 		return
 	}
 
-    type Container struct {
+	// blindly try json and x-www-form-urlencoded
+	type Container struct {
         Token struct {
-            //Key2 string `json:"_id"`
             AccessToken string `json:"token"`
         } `json:"access_token"`
     }
     var jsonResponse Container
-
-    if err := json.Unmarshal(body, &jsonResponse); err != nil {
-    		log.Fatal(err)
-    }
-
-	log.Printf("------------manoj---------------")
-    log.Printf("%s Token:", jsonResponse.Token.AccessToken)
-    log.Printf("------------manoj---------------")
-	// blindly try json and x-www-form-urlencoded
-	//var jsonResponse struct {
-	//	AccessToken string `json:"access_token.token"`
-	//}
-
-	//log.Printf("%s jsonResponse:", jsonResponse)
-	//log.Printf("%s jsonResponse111:", json.Unmarshal(body, &jsonResponse))
-	//log.Printf("%s jsonResponse.AccessToken:", jsonResponse.AccessToken)
-	//err = json.Unmarshal(body, &jsonResponse)
-	//if err == nil {
-//		s = &SessionState{
-//			AccessToken: jsonResponse.AccessToken,
-//		}
-//		return
-//	}
+	err = json.Unmarshal(body, &jsonResponse)
+	if err == nil {
+		s = &SessionState{
+			AccessToken: jsonResponse.Token.AccessToken,
+		}
+		return
+	}
 
 	var v url.Values
 	v, err = url.ParseQuery(string(body))
-	log.Printf("%s manoj11:", body)
-	log.Printf("%s manoj:", v)
 	if err != nil {
 		return
 	}
