@@ -57,7 +57,7 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
     log.Printf("%s manoj11111111:", body)
 	// blindly try json and x-www-form-urlencoded
 	var jsonResponse struct {
-		AccessToken string `json:"access_token"`
+		AccessToken string `json:"access_token.token"`
 	}
 	log.Printf("%s jsonResponse:", jsonResponse)
 	log.Printf("%s jsonResponse111:", json.Unmarshal(body, &jsonResponse))
