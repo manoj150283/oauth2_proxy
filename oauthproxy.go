@@ -227,11 +227,13 @@ func (p *OAuthProxy) redeemCode(host, code string) (s *providers.SessionState, e
 		return nil, errors.New("missing code")
 	}
 	redirectURI := p.GetRedirectURI(host)
+	log.Printf("%s Redirect URL:", redirectURI)
+	log.Printf("%s Code:", code)
 	s, err = p.provider.Redeem(redirectURI, code)
 	if err != nil {
 		return
 	}
-
+    log.Printf("%s S:", s)
 	if s.Email == "" {
 		s.Email, err = p.provider.GetEmailAddress(s)
 	}
