@@ -65,6 +65,9 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 		s = &SessionState{
 			AccessToken: jsonResponse.Token.AccessToken,
 		}
+		log.Printf("------------manoj---------------")
+        log.Printf("%s Token:", jsonResponse.Token.AccessToken)
+        log.Printf("------------manoj---------------")
 		return
 	}
 
