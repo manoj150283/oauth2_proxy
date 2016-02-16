@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/manoj150283/cookie"
+	"github.com/manoj150283/oauth2_proxy/cookie"
 )
 
 func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err error) {
