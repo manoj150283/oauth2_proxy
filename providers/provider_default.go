@@ -54,11 +54,13 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 		err = fmt.Errorf("got %d from %q %s", resp.StatusCode, p.RedeemURL.String(), body)
 		return
 	}
-
+    log.Printf("%s manoj11111111:", body)
 	// blindly try json and x-www-form-urlencoded
 	var jsonResponse struct {
 		AccessToken string `json:"access_token"`
 	}
+	log.Printf("%s jsonResponse:", &jsonResponse)
+	log.Printf("%s jsonResponse.AccessToken:", jsonResponse.AccessToken)
 	err = json.Unmarshal(body, &jsonResponse)
 	if err == nil {
 		s = &SessionState{
