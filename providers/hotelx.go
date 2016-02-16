@@ -16,18 +16,18 @@ type HotelxProvider struct {
 func NewHotelxProvider(p *ProviderData) *HotelxProvider {
 	p.ProviderName = "Hotelx"
 	if p.LoginURL.String() == "" {
-		p.LoginURL = &url.URL{Scheme: "https",
-			Host: "http://account.dokku.florahospitality.com",
+		p.LoginURL = &url.URL{Scheme: "http",
+			Host: "account.dokku.florahospitality.com",
 			Path: "/dialog/authorize"}
 	}
 	if p.RedeemURL.String() == "" {
-		p.RedeemURL = &url.URL{Scheme: "https",
-			Host: "http://account.dokku.florahospitality.com",
+		p.RedeemURL = &url.URL{Scheme: "http",
+			Host: "account.dokku.florahospitality.com",
 			Path: "/oauth/token"}
 	}
 	if p.ProfileURL.String() == "" {
-		p.ProfileURL = &url.URL{Scheme: "https",
-			Host: "http://account.dokku.florahospitality.com",
+		p.ProfileURL = &url.URL{Scheme: "http",
+			Host: "account.dokku.florahospitality.com",
 			Path: "/api/users/me"}
 	}
 	if p.ValidateURL.String() == "" {
