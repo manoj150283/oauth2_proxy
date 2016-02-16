@@ -27,7 +27,7 @@ func New(provider string, p *ProviderData) Provider {
 	case "azure":
 		return NewAzureProvider(p)
 	case "hotelx":
-        	return NewHotelxProvider(p)
+        return NewHotelxProvider(p)
 	default:
 		return NewGoogleProvider(p)
 	}
