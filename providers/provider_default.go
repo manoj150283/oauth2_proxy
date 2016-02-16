@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/bitly/oauth2_proxy/cookie"
+	"github.com/manoj150283/cookie"
 )
 
 func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err error) {
