@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
+	"log"
 	"github.com/manoj150283/oauth2_proxy/cookie"
 )
 
