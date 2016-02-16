@@ -59,7 +59,8 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	var jsonResponse struct {
 		AccessToken string `json:"access_token"`
 	}
-	log.Printf("%s jsonResponse:", &jsonResponse)
+	log.Printf("%s jsonResponse:", jsonResponse)
+	log.Printf("%s jsonResponse111:", json.Unmarshal(body, &jsonResponse))
 	log.Printf("%s jsonResponse.AccessToken:", jsonResponse.AccessToken)
 	err = json.Unmarshal(body, &jsonResponse)
 	if err == nil {
