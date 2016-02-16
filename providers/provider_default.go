@@ -72,6 +72,7 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	if err != nil {
 		return
 	}
+	log.Printf("%s ParseQuery string body:", v)
 	if a := v.Get("access_token"); a != "" {
 		s = &SessionState{AccessToken: a}
 	} else {
