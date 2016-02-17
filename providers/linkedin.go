@@ -62,7 +62,6 @@ func (p *LinkedInProvider) GetEmailAddress(s *SessionState) (string, error) {
 		return "", err
 	}
     log.Printf("%s -----------------Json:------------", json)
-    log.Printf("%s -----------------Json String:------------", json.String())
 	email, err := json.String()
 	if err != nil {
 		return "", err
