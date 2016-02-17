@@ -70,11 +70,11 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
             AccessToken string `json:"token"`
         } `json:"access_token"`
     }
-    var jsonResponse Container
-	err = json.Unmarshal(body, &jsonResponse)
+    var response Container
+	err = json.Unmarshal(body, &response)
 	if err == nil {
 		s = &SessionState{
-			AccessToken: jsonResponse.Token.AccessToken,
+			AccessToken: response.Token.AccessToken,
 		}
 		return
 	}
