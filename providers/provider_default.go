@@ -53,6 +53,18 @@ func (p *ProviderData) Redeem(redirectURL, code string) (s *SessionState, err er
 	}
 
 	// blindly try json and x-www-form-urlencoded
+	var jsonResponse struct {
+    		AccessToken string `json:"access_token"`
+    	}
+    err = json.Unmarshal(body, &jsonResponse)
+    if err == nil {
+        s = &SessionState{
+            AccessToken: jsonResponse.AccessToken,
+        }
+        return
+    }
+
+    // blindly try json and x-www-form-urlencoded
 	type Container struct {
         Token struct {
             AccessToken string `json:"token"`
