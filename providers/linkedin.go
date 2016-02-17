@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-
+    "log"
 	"github.com/manoj150283/oauth2_proxy/api"
 )
 
@@ -61,11 +61,13 @@ func (p *LinkedInProvider) GetEmailAddress(s *SessionState) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
+    log.Printf("%s -----------------Json:------------", json)
+    log.Printf("%s -----------------Json String:------------", json.String())
 	email, err := json.String()
 	if err != nil {
 		return "", err
 	}
+	log.Printf("%s -----------------Email:------------", email)
 	return email, nil
 }
 
