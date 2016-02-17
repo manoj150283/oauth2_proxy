@@ -233,7 +233,7 @@ func (p *OAuthProxy) redeemCode(host, code string) (s *providers.SessionState, e
 	if err != nil {
 		return
 	}
-	log.printf("-------------------Manoj-------------------")
+	log.Printf("-------------------Manoj-------------------")
     log.Printf("%s S:", s)
 	if s.Email == "" {
 		s.Email, err = p.provider.GetEmailAddress(s)
